@@ -39,3 +39,6 @@ and from the command line, cd into the project directory and type
 ```  
 Of course you can add this to yoru favourite IDE also. I have this running within WebStorm.
 
+Disclaimer
+----------
+I'm originally a Java developer and have a history of hackery, which means you shouldn't expect my Javascript disciplines to be anything special, and I'd love to see feedback and even pull requests for anything you think could do with improvement.
