@@ -17,6 +17,10 @@ I've retrofitted unit tests around the leaderboard example app. These show you h
 * Metoer startup scripts
 * Database collection initialisation counts
 
+Bonus
+
+* You are able to run Testacular in the background, whilst you have your meteor server up and running, and they play very nicely with each other without any conflicts between the mocks and such.
+
 Testing Philosophy
 ------------------
 I'm a beleiver that you only need to have two levels of testing: Unit and Features. In my experience, as a developer I should have two users in mind when writing code: the end-user (feature level) and other developers (unit level). 
