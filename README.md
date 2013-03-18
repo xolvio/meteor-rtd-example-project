@@ -7,6 +7,16 @@ A boilerplate project to use for creating a meteor app with testacular and runni
 * End-to-end UI-level testing, also running in the background using PhantomJS
 * Deployment to AWS from within the project using command-line tools
 
+Current Status
+--------------
+I've retrofitted unit tests around the leaderboard example app. These show you how to unit test:
+
+* Template functions
+* Template events
+* Session attributes
+* Metoer startup scripts
+* Database collection initialisation counts
+
 Testing Philosophy
 ------------------
 I'm a beleiver that you only need to have two levels of testing: Unit and Features. In my experience, as a developer I should have two users in mind when writing code: the end-user (feature level) and other developers (unit level). 
