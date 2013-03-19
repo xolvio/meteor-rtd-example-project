@@ -1,0 +1,38 @@
+{
+    "name": "test-area",
+    "preferGlobal": true,
+    "version": "0.0.1",
+    "author": "Sam Hatoum <sam@xolvio.com>",
+    "description": "a unit and acceptance testing approach to Meteor apps",
+    "contributors": [
+        {
+            "name": "Paul Dunnavant",
+            "email": "paul@xolvio.com"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/xolvio/meteor-testacular-aws-boilerplate.git"
+    },
+    "keywords": [
+        "meteor",
+        "test",
+        "tdd",
+        "acceptance",
+        "testing"
+    ],
+    "dependencies": {
+        "karma": "0.8.x",
+        "PhantomJS": "1.8.x",
+        "selenium-webdriver": "2.31.x"
+    },
+    "analyze": false,
+    "devDependencies": {
+    },
+    "bundledDependencies": [
+    ],
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.8"
+    }
+}

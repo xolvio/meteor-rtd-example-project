@@ -1,48 +1,85 @@
-meteor-testacular-aws-boilerplate
-=================================
+Realtime TDD with Meteor
+========================
+This is a template project attempting a real-time test driven development with Meteor, along with a full build and
+deployment pipeline on Amazon AWS. It's purpose is to allow a team to land on their feet running, or to shortcut
+iteration 0, as it's known in the agile community.
 
-A boilerplate project to use for creating a meteor app with testacular and running on Amazon Web Services. The goals here are:
+It can:
+* Meteor unit testing with Jasmine
+* Compile-time code coverage using Istanbul
 
-* True unit testing with meteor, with all the stubs and mocks needed for this
-* End-to-end UI-level testing, also running in the background using PhantomJS
-* Deployment to AWS from within the project using command-line tools
+It's currently having surgery to get:
+* End-to-end acceptance testing with WebdriverJS + PhantomJS/GhostDriver
 
-Current Status
---------------
-I've retrofitted unit tests around the leaderboard example app. These show you how to unit test:
+It's planned to do:
+* Run-time code coverage using Istanbul
+* TeamCity pre-tested (delayed) commit
+* Blue/Green release process to AWS
+* Multi-node replica set MongoDB on AWS
+* Horizontally scaled Meteor servers on AWS
 
-* Template functions
-* Template events
-* Session attributes
-* Metoer startup scripts
-* Database collection initialisation counts
+What's included?
+----------------
+* Karma with file watchers, console reporter and coverage configured
+* Retrofitted unit and acceptance tests around the Meteor leaderboard example app demonstrating 100% test coverage
+* Mock methods for Meteor templates to expose functions and events to unit tests
+* Session stub with get/set methods
+* Meteor stub with hooks into the Meteor.x methods
+* Database collection stub that allows you to count the number of times a collection has been instenitated
 
-Bonus
+What is Realtime TDD?
+---------------------
+This is a term I have coined to see if it will catch on! It's based on the following philosophy that I live my work life
+by:
 
-* You are able to run Testacular in the background, whilst you have your meteor server up and running, and they play very nicely with each other without any conflicts between the mocks and such.
+The ability to deal with feedback is a great indicator of quality. So the earlier feedback can be captured and the
+quicker it can be dealt with, the lower the cost of development and the high the quality of the end product. With that
+in mind, there are numerous practises to capture feedback in the whole product development lifecycle, from unit testing
+to watching users engage with the system.
 
-Testing Philosophy
-------------------
-I'm a beleiver that you only need to have two levels of testing: Unit and Features. In my experience, as a developer I should have two users in mind when writing code: the end-user (feature level) and other developers (unit level). 
+The key automatable areas are:
+* Static analysis (linting, test coverage)
+* Automated testing (unit & acceptance)
+* Monitoring (logging)
+* Performance testing (stress, load, soak)
 
-My prefrence is to start with a feature test and break it down to into valuable user-centric vertical slices. Then for each slice, break down into the units needed to fulfil it. I do this by drilling down the stack one level at a time, driving every unit of code with tests, until the slice is complete. I find this disciplined approach gets exceptionally good test coverage.
+Now consider the ideal scenario of getting realtime feedback from every area above whilst you're coding. Then consider
+that we're not that far off that ability with all the magic work of the community.
 
-There are some challanges when doing this with frameworks, and Meteor is no exception. Meteor introduces a convention to do all it's magic. The challange is to tap into that convention and exposing the units of code I've written, so they can be unit tested.
+This project is aimted at helping us deliver better quality and drive our productivity through the roof!
 
 Instructions
 ------------
-Make sure you have installed testacular globally
-
+Ensure you have Meteor installed:
 ```bash
-  npm install -g testacular
+  curl https://install.meteor.com | /bin/sh
 ```
-  
-and from the command line, cd into the project directory and type
+
+Optional: Install these libraries globally:
 ```bash
-  testacular start
-```  
-Of course you can add this to yoru favourite IDE also. I have this running within WebStorm.
+  npm install -g karma
+  npm install -g PhantomJS
+  npm install -g selenium-webdriver
+```
+
+Clone this project's git repo, cd into the /test directory and run:
+```bash
+  npm install
+```
+
+Start karma to get the realtime testing feedback:
+```bash
+  karma start
+```
+
+Finally start meteor to get realtime app development feedback:
+```bash
+  meteor
+```
+
+Of course you can add the final two commands to your favourite IDE.
 
 Disclaimer
 ----------
-I'm originally a Java developer and have a history of hackery, which means you shouldn't expect my Javascript disciplines to be anything special, and I'd love to see feedback and even pull requests for anything you think could do with improvement.
+I'm originally a Java / Grails developer which means you shouldn't expect my Javascript disciplines to be amazing. I'd
+love to see feedback and of course pull requests for anything you think could do with improvement.
