@@ -1,18 +1,22 @@
 Realtime TDD with Meteor
 ========================
-This is a template project attempting a real-time test driven development with Meteor, along with a full build and
+This is a template project attempting real-time test driven development with Meteor, along with a full build and
 deployment pipeline on Amazon AWS. It's purpose is to allow a team to land on their feet running, or to shortcut
-iteration 0, as it's known in the agile community.
+iteration 0 as it's known in the agile community.
 
 It can do:
-* Meteor unit testing with Jasmine
+* Meteor unit testing with Jasmine, with all the necessary stubbing (See below)
 * Compile-time code coverage using Istanbul
+* File watcher runs all tests and coverage reports (thanks to [Karma](http://karma-runner.github.com/))
 
-It's currently having surgery to get:
+It's currently undergoing surgery to get:
 * End-to-end acceptance testing with WebdriverJS + PhantomJS/GhostDriver
 
-It's planned to do:
-* Run-time code coverage using Istanbul
+It's next going to get:
+* File watcher updates browser windows showing acceptance test/coverage reports
+* Combined code coverage report from both unit and acceptance test runs (to give a true indication of test coverage)
+
+It's eventually planned to get:
 * TeamCity pre-tested (delayed) commit
 * Blue/Green release process to AWS
 * Multi-node replica set MongoDB on AWS
@@ -20,33 +24,33 @@ It's planned to do:
 
 What's included?
 ----------------
-* Karma with file watchers, console reporter and coverage configured
+* Karma with file watchers, Jasmine (can easily be switched to Mocha), console reporter and coverage configured
 * Retrofitted unit and acceptance tests around the Meteor leaderboard example app demonstrating 100% test coverage
-* Mock methods for Meteor templates to expose functions and events to unit tests
-* Session stub with get/set methods
+* Templates stub that expose functions and events to unit tests
+* Model stub that allows [Jasmine spies](https://github.com/pivotal/jasmine/wiki/Spies) to be used
 * Meteor stub with hooks into the Meteor.x methods
-* Database collection stub that allows you to count the number of times a collection has been instenitated
+* Session stub with get/set methods
+* Collection stub that allows you to count the number of times a collection has been initialized
 
 What is Realtime TDD?
 ---------------------
-This is a term I have coined to see if it will catch on! It's based on the following philosophy that I live my work life
-by:
+This is a term I have coined to see if it will catch on :) It's based on the following philosophy, which I live my work
+life by:
 
-The ability to deal with feedback is a great indicator of quality. So the earlier feedback can be captured and the
-quicker it can be dealt with, the lower the cost of development and the high the quality of the end product. With that
-in mind, there are numerous practises to capture feedback in the whole product development lifecycle, from unit testing
-to watching users engage with the system.
+The ability to capture and deal with feedback it is a great indicator of quality, both of working practises and the end
+product. Feedback comes in all shapes and sizes and the earlier it can be captured, the easier and cheaper it is to deal
+with. Now consider the ideal scenario of getting feedback in realtime, then consider the trend of using file watchers
+and the speed of which test run in a Javascript environment. You could say we're not that far off from this ideal with
+all the magic efforts the community has put in.
 
-The key automatable areas are:
+This project aims to get the product development process as close as possible to that ideal so we can deliver better
+quality products and enjoy doing it.
+
+The key feedback areas are:
 * Static analysis (linting, test coverage)
 * Automated testing (unit & acceptance)
-* Monitoring (logging)
+* Monitoring (metrics and logging)
 * Performance testing (stress, load, soak)
-
-Now consider the ideal scenario of getting realtime feedback from every area above whilst you're coding. Then consider
-that we're not that far off that ability with all the magic work of the community.
-
-This project puts that hard work together to help developers deliver better quality and drive productivity upwards.
 
 Instructions
 ------------
@@ -77,9 +81,9 @@ Finally start meteor to get realtime app development feedback:
   meteor
 ```
 
-Of course you can add the final two commands to your favourite IDE.
+Enjoy!
 
 Disclaimer
 ----------
-I'm originally a Java / Grails developer which means you shouldn't expect my Javascript disciplines to be amazing. I'd
-love to see feedback and of course pull requests for anything you think could do with improvement.
+I'm originally a Java / Grails developer which means you shouldn't expect my Javascript to be amazing. I'd love to hear
+feedback and of course pull requests for anything you think could do with improvement.
