@@ -1,6 +1,1 @@
-meteor-testacular-aws-boilerplate
-=================================
-
-Renamed the project as testacular no longer exists. This is just a redirect page.
-
-[Realtime-TDD-with-Meteor]
+Moved here: [Realtime-TDD-with-Meteor](https://github.com/xolvio/Realtime-TDD-with-Meteor)
