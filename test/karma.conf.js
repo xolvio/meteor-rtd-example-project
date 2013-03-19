@@ -1,9 +1,5 @@
-// Testacular configuration
-// Generated on Sun Mar 17 2013 18:10:04 GMT-0700 (PDT)
-
-
 // base path, that will be used to resolve files and exclude
-basePath = '';
+basePath = '..';
 
 
 // list of files / patterns to load in the browser
@@ -24,23 +20,29 @@ files = [
     // now all the dependancies have been sorted, all our units can be loaded
     'app/server/**/*.js',
     'app/client/**/*.js',
-
-    // NOTE: still trying to figure out how to combine Testacular + Jasmine + jQuery + Syn for E2E testing
-    // since these run in the browser and hit the end-to-end running app, it doesn't matter where
-    // they load as long as the app is running
-    //'test/acceptance/**/*.js'
 ];
 
 
 // list of files to exclude
 exclude = [
-    'testacular.conf.js'
+    'karma.conf.js'
 ];
 
+preprocessors = {
+    '**/app/model/**/*.js': 'coverage',
+    '**/app/server/**/*.js': 'coverage',
+    '**/app/client/**/*.js': 'coverage'
+};
+
+coverageReporter = {
+    type: 'html',
+    dir: 'build/reports/coverage/',
+    file: 'coverage.txt'
+};
 
 // test results reporter to use
 // possible values: 'dots', 'progress', 'junit'
-reporters = ['progress'];
+reporters = ['progress', 'coverage'];
 
 
 // web server port
@@ -58,7 +60,6 @@ colors = true;
 // level of logging
 // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
 logLevel = LOG_INFO;
-
 
 // enable / disable watching file and executing tests whenever any file changes
 autoWatch = true;
