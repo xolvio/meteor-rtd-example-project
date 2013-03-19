@@ -7,7 +7,6 @@ var Meteor = {
     },
     addedCollections: {},
     Collection: function(modelName) {
-        console.log(modelName, Meteor.addedCollections[modelName]);
         if (Meteor.addedCollections[modelName]) {
             Meteor.addedCollections[modelName]++;
         } else {
