@@ -4,7 +4,7 @@ This is a template project attempting a real-time test driven development with M
 deployment pipeline on Amazon AWS. It's purpose is to allow a team to land on their feet running, or to shortcut
 iteration 0, as it's known in the agile community.
 
-It can:
+It can do:
 * Meteor unit testing with Jasmine
 * Compile-time code coverage using Istanbul
 
@@ -46,7 +46,7 @@ The key automatable areas are:
 Now consider the ideal scenario of getting realtime feedback from every area above whilst you're coding. Then consider
 that we're not that far off that ability with all the magic work of the community.
 
-This project is aimted at helping us deliver better quality and drive our productivity through the roof!
+This project puts that hard work together to help developers deliver better quality and drive productivity upwards.
 
 Instructions
 ------------
