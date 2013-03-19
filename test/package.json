@@ -1,5 +1,5 @@
 {
-    "name": "test-area",
+    "name": "Realtime-TDD-with-Meteor",
     "preferGlobal": true,
     "version": "0.0.1",
     "author": "Sam Hatoum <sam@xolvio.com>",
@@ -12,7 +12,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/xolvio/meteor-testacular-aws-boilerplate.git"
+        "url": "https://github.com/xolvio/Realtime-TDD-with-Meteor.git"
     },
     "keywords": [
         "meteor",

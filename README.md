@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Realtime TDD with Meteor
 ========================
 This is a template project attempting a real-time test driven development with Meteor, along with a full build and
@@ -83,3 +84,6 @@ Disclaimer
 ----------
 I'm originally a Java / Grails developer which means you shouldn't expect my Javascript disciplines to be amazing. I'd
 love to see feedback and of course pull requests for anything you think could do with improvement.
+=======
+Moved here: [Realtime-TDD-with-Meteor](https://github.com/xolvio/Realtime-TDD-with-Meteor)
+>>>>>>> 53bf29fd8681d08f7149df6e8c39c9d6961db41d
