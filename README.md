@@ -1,6 +1,6 @@
-Realtime TDD with Meteor
-========================
-This is a template project attempting real-time test driven development with Meteor, along with a full build and
+Acute Feedback Development (AFD) with Meteor
+============================================
+This is a template project attempting acute-feedback development with Meteor, along with a full build and
 deployment pipeline on Amazon AWS. It's purpose is to allow a team to land on their feet running, or to shortcut
 iteration 0 as it's known in the agile community.
 
@@ -33,8 +33,8 @@ What's included?
 * Session stub with get/set methods
 * Collection stub that allows you to count the number of times a collection has been initialized
 
-What is Realtime TDD?
----------------------
+What is Acute Feedback Development
+----------------------------------
 This is a term I have coined to see if it will catch on :) It's based on the following philosophy, which I live my work
 life by:
 
