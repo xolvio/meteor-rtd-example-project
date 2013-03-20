@@ -4,19 +4,20 @@ This is a template project attempting real-time test driven development with Met
 deployment pipeline on Amazon AWS. It's purpose is to allow a team to land on their feet running, or to shortcut
 iteration 0 as it's known in the agile community.
 
-It can do:
+It can do today:
 * Meteor unit testing with Jasmine, with all the necessary stubbing (See below)
 * Compile-time code coverage using Istanbul
 * File watcher runs all tests and coverage reports (thanks to [Karma](http://karma-runner.github.com/))
 
-It's currently undergoing surgery to get:
+It will do soon:
 * End-to-end acceptance testing with WebdriverJS + PhantomJS/GhostDriver
 
-It's next going to get:
+It will do next:
 * File watcher updates browser windows showing acceptance test/coverage reports
 * Combined code coverage report from both unit and acceptance test runs (to give a true indication of test coverage)
+* Growl notifications
 
-It's eventually planned to get:
+It will do eventually:
 * TeamCity pre-tested (delayed) commit
 * Blue/Green release process to AWS
 * Multi-node replica set MongoDB on AWS
@@ -54,15 +55,24 @@ The key feedback areas are:
 
 Instructions
 ------------
-Ensure you have Meteor installed:
+Ensure you have [Meteor](http://meteor.com) installed:
 ```bash
   curl https://install.meteor.com | /bin/sh
 ```
 
-Optional: Install these libraries globally:
+Ensure you have Node installed. You can use [nvm](https://github.com/creationix/nvm) as it's easy:
+```bash
+  curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+```
+open a new terminal and type:
+```bash
+  nvm install 0.10.0
+```
+
+OPTIONAL: Install these libraries globally:
 ```bash
   npm install -g karma
-  npm install -g PhantomJS
+  npm install -g phantomjs
   npm install -g selenium-webdriver
 ```
 
