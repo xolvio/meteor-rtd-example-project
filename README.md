@@ -1,6 +1,6 @@
 Real Time Development (RTD) with Meteor
 =======================================
-If you haven't already, you might want to take a look at the [RTD blurb](https://github.com/xolvio/acute-feedback-development-with-meteor/wiki/Real-Time-Development).
+If you haven't already, you might want to take a look at the [RTD blurb](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development).
 
 This is a template project exemplifying RTD with Meteor.
 
