@@ -1,75 +1,48 @@
-Acute Feedback Development (AFD) with Meteor
-============================================
-This is a template project attempting acute-feedback development with Meteor, along with a full build and
-deployment pipeline on Amazon AWS. It's purpose is to allow a team to land on their feet running, or to shortcut
-iteration 0 as it's known in the agile community.
+Real Time Development (RTD) with Meteor
+=======================================
+If you haven't already, you might want to take a look at the [RTD blurb](https://github.com/xolvio/acute-feedback-development-with-meteor/wiki/Real-Time-Development).
 
-It can do today:
-* Meteor unit testing with Jasmine, with all the necessary stubbing (See below)
-* Compile-time code coverage using Istanbul
+This is a template project exemplifying RTD with Meteor.
+
+What you get:
+* Meteor unit testing with Jasmine, with all the necessary stubbing that isolates units of code
+* Compile-time test coverage using Istanbul
 * File watcher runs all tests and coverage reports (thanks to [Karma](http://karma-runner.github.com/))
+* End-to-end acceptance testing with WebdriverJS + PhantomJS/GhostDriver running against separate synchronized Meteor instance with it's own database
 
-It will do soon:
-* End-to-end acceptance testing with WebdriverJS + PhantomJS/GhostDriver
-
-It will do next:
+What being worked on right now:
 * File watcher updates browser windows showing acceptance test/coverage reports
 * Combined code coverage report from both unit and acceptance test runs (to give a true indication of test coverage)
 * Growl notifications
 
-It will do eventually:
+What planned eventually:
 * TeamCity pre-tested (delayed) commit
 * Blue/Green release process to AWS
 * Multi-node replica set MongoDB on AWS
 * Horizontally scaled Meteor servers on AWS
 
-What's included?
-----------------
-* Karma with file watchers, Jasmine (can easily be switched to Mocha), console reporter and coverage configured
+How does it work?
+-----------------
+* Karma is configured with file watchers, Jasmine (can easily be switched to Mocha), console reporter and test coverage
 * Retrofitted unit and acceptance tests around the Meteor leaderboard example app demonstrating 100% test coverage
-* Templates stub that expose functions and events to unit tests
-* Model stub that allows [Jasmine spies](https://github.com/pivotal/jasmine/wiki/Spies) to be used
-* Meteor stub with hooks into the Meteor.x methods
+* Templates stub that expose attributes, functions and events to unit tests
+* Model stub that allows [Jasmine spies](https://github.com/pivotal/jasmine/wiki/Spies) to spy and assert
+* Meteor stub with hooks into the Meteor.xyz methods
 * Session stub with get/set methods
 * Collection stub that allows you to count the number of times a collection has been initialized
-
-What is Acute Feedback Development
-----------------------------------
-This is a term I have coined to see if it will catch on :) It's based on the following philosophy, which I live my work
-life by:
-
-The ability to capture and deal with feedback it is a great indicator of quality, both of working practises and the end
-product. Feedback comes in all shapes and sizes and the earlier it can be captured, the easier and cheaper it is to deal
-with. Now consider the ideal scenario of getting feedback in realtime, then consider the trend of using file watchers
-and the speed of which test run in a Javascript environment. You could say we're not that far off from this ideal with
-all the magic efforts the community has put in.
-
-This project aims to get the product development process as close as possible to that ideal so we can deliver better
-quality products and enjoy doing it.
-
-The key feedback areas are:
-* Static analysis (linting, test coverage)
-* Automated testing (unit & acceptance)
-* Monitoring (metrics and logging)
-* Performance testing (stress, load, soak)
+* Grunt script that keeps a parallel instance of meteor updates with code changes dedicated to acceptance tests
+* A grunt task that runs all of the above together
 
 Instructions
 ------------
 Ensure you have [Meteor](http://meteor.com) installed:
 ```bash
   curl https://install.meteor.com | /bin/sh
-```
+``````
 
-Ensure you have Node installed. You can use [nvm](https://github.com/creationix/nvm) as it's easy:
-```bash
-  curl https://raw.github.com/creationix/nvm/master/install.sh | sh
-```
-open a new terminal and type:
-```bash
-  nvm install 0.10.0
-```
+You'll need [node](http://nodejs.org/)
 
-OPTIONAL: Install these libraries globally:
+You should also have these installed globally:
 ```bash
   npm install -g karma
   npm install -g phantomjs
@@ -79,21 +52,7 @@ OPTIONAL: Install these libraries globally:
 Clone this project's git repo, cd into the /test directory and run:
 ```bash
   npm install
+  grunt
 ```
 
-Start karma to get the realtime testing feedback:
-```bash
-  karma start
-```
-
-Finally start meteor to get realtime app development feedback:
-```bash
-  meteor
-```
-
-Enjoy!
-
-Disclaimer
-----------
-I'm originally a Java / Grails developer which means you shouldn't expect my Javascript to be amazing. I'd love to hear
-feedback and of course pull requests for anything you think could do with improvement.
+Enjoy seeing unit tests, acceptance tests and coverage feedback as well as app updates every time you save a file.

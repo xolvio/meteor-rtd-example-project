@@ -17,9 +17,9 @@ files = [
     // they set mocks ahead of time for the units so they have to be loaded first
     'test/unit/**/*.js',
 
-    // now all the dependancies have been sorted, all our units can be loaded
+    // now all the dependencies have been sorted, all our units can be loaded
     'app/server/**/*.js',
-    'app/client/**/*.js',
+    'app/client/**/*.js'
 ];
 
 

@@ -1,38 +1,46 @@
 {
-    "name": "Realtime-TDD-with-Meteor",
-    "preferGlobal": true,
-    "version": "0.0.1",
-    "author": "Sam Hatoum <sam@xolvio.com>",
-    "description": "a unit and acceptance testing approach to Meteor apps",
-    "contributors": [
-        {
-            "name": "Paul Dunnavant",
-            "email": "paul@xolvio.com"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/xolvio/Realtime-TDD-with-Meteor.git"
+  "name": "acute-feedback-development",
+  "preferGlobal": true,
+  "version": "0.0.1",
+  "author": "Sam Hatoum <sam@xolvio.com>",
+  "description": "a unit and acceptance testing approach to Meteor apps",
+  "contributors": [
+    {
+      "name": "Paul Dunnavant",
+      "email": "paul@xolvio.com"
     },
-    "keywords": [
-        "meteor",
-        "test",
-        "tdd",
-        "acceptance",
-        "testing"
-    ],
-    "dependencies": {
-        "karma": "0.8.x",
-        "phantomjs": "1.8.x",
-        "selenium-webdriver": "2.31.x"
-    },
-    "analyze": false,
-    "devDependencies": {
-    },
-    "bundledDependencies": [
-    ],
-    "license": "MIT",
-    "engines": {
-        "node": ">=0.8"
+    {
+      "name": "Miguel Alvarado",
+      "email": "miguel@xolvio.com"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xolvio/acute-feedback-development-with-meteor.git"
+  },
+  "keywords": [
+    "feedback",
+    "test",
+    "tdd",
+    "acceptance",
+    "testing"
+  ],
+  "dependencies": {
+    "phantomjs": "1.8.x",
+    "selenium-webdriver": "2.31.x"
+  },
+  "analyze": false,
+  "devDependencies": {
+    "karma": "~0.8.0",
+    "grunt": "~0.4.1",
+    "grunt-exec": "~0.4.0",
+    "grunt-bg-shell": "~2.0.1",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-istanbul": "~0.2.1"
+  },
+  "bundledDependencies": [],
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.8"
+  }
 }
