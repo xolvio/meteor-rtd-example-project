@@ -10,14 +10,12 @@ files = [
     // stubs come first so they can be available when all the units need them
     'test/unit/stubs.js',
 
-    // models have to be loaded next, otherwise they overwrite any mocked models
-    'app/model/**/*.js',
-
     // the reason we load unit tests next is because they don't depend on the app. On the contrary,
     // they set mocks ahead of time for the units so they have to be loaded first
     'test/unit/**/*.js',
 
     // now all the dependencies have been sorted, all our units can be loaded
+    'app/models/**/*.js',
     'app/server/**/*.js',
     'app/client/**/*.js'
 ];
@@ -29,7 +27,7 @@ exclude = [
 ];
 
 preprocessors = {
-    '**/app/model/**/*.js': 'coverage',
+    '**/app/models/**/*.js': 'coverage',
     '**/app/server/**/*.js': 'coverage',
     '**/app/client/**/*.js': 'coverage'
 };

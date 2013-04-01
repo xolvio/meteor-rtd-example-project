@@ -1,5 +1,3 @@
-Models.stub('Players');
-
 describe("Meteor startup", function () {
 
     it("inserts players into the Players collection if it's empty", function () {

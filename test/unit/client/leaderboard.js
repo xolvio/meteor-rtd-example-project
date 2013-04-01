@@ -1,10 +1,9 @@
-Models.stub('Players');
 Template.stub('leaderboard');
 Template.stub('player');
 
 describe("Template.leaderboard.players", function() {
 
-    it("asks for the players to be primlarly in descending score order, then in alphabetical order and returns as is", function() {
+    it("asks for the players to be primarily in descending score order, then in alphabetical order and returns as is", function() {
         var someLocalCollectionCursor = {};
         Players.find = function(selector, options) {
             expect(options.sort.score).toBe(-1);
@@ -65,7 +64,7 @@ describe("Template.leaderboard [click input.inc] event", function() {
             expect(selector).toBe(1234);
             expect(options.$inc.score).toBe(5);
         };
-        Template.leaderboard.events['click input.inc']();
+        Template.leaderboard.fireEvent('click input.inc');
     });
 
 });
@@ -73,8 +72,8 @@ describe("Template.leaderboard [click input.inc] event", function() {
 describe("Template.player [click] event", function () {
 
     it("clicking a player sets them to the selected player in the session", function() {
-        Template.player.events._id = 888;
-        Template.player.events['click']();
+        Template.leaderboard.addAttribute('_id', 888);
+        Template.leaderboard.fireEvent('click');
         expect(Session.get("selected_player")).toBe(888);
     });
 

@@ -1,53 +1,71 @@
 //noinspection ThisExpressionReferencesGlobalObjectJS
-var _GLOBAL = this;
+
+var emptyFunction = function () {
+};
 
 var Meteor = {
+    instantiationCounts: {},
+    publishFunctions: {},
+    subscribeFunctions: {},
     startup: function (newStartupFunction) {
         Meteor.startup = newStartupFunction;
     },
-    addedCollections: {},
-    Collection: function(modelName) {
-        if (Meteor.addedCollections[modelName]) {
-            Meteor.addedCollections[modelName]++;
-        } else {
-            Meteor.addedCollections[modelName] = 1;
-        }
+    Collection: function (collectionName) {
+        Meteor.instantiationCounts[collectionName] = Meteor.instantiationCounts[collectionName] ? Meteor.instantiationCounts[collectionName] + 1 : 1;
+    },
+    publish: function (modelName, publishFunction) {
+        this.publishFunctions[modelName] = publishFunction;
+    },
+    subscribe: function (modelName, subscribeFunction) {
+        this.subscribeFunctions[modelName] = subscribeFunction;
     }
 };
 
-var Template = {
-    "stub": function (templateName) {
-        this[templateName] = {
-            "events": function (events) {
-                this.events = events;
+Meteor.Collection.prototype = {
+    insert: emptyFunction,
+    find: emptyFunction,
+    findOne: emptyFunction,
+    update: emptyFunction,
+    remove: emptyFunction,
+    allow: emptyFunction,
+    deny: emptyFunction
+};
+
+var TemplateClass = function () {
+};
+TemplateClass.prototype = {
+    eventMap: {},
+    stub: function (templateName) {
+        TemplateClass.prototype[templateName] = {
+            events: function (eventMap) {
+                for (var event in eventMap) {
+                    TemplateClass.prototype.eventMap[event] = eventMap[event];
+                }
+            },
+            fireEvent: function (key) {
+                TemplateClass.prototype.eventMap[key]();
+            },
+            addAttribute: function (key, value) {
+                TemplateClass.prototype.eventMap[key] = value;
             }
         };
     }
 };
-
-var Models = {
-    "stub": function(modelName) {
-        _GLOBAL[modelName] = {
-            find : function () {},
-            insert : function () {}
-        };
-    }
-};
+var Template = new TemplateClass();
 
 var Session = {
     store: {},
-    get: function(key) {
+    get: function (key) {
         return this.store[key];
     },
-    set: function(key, value) {
+    set: function (key, value) {
         this.store[key] = value;
     },
-    equals: function(key, value) {
+    equals: function (key, value) {
         return this.store[key] === value;
     }
 };
 
 var Random = {
-    fraction: function() {
-    }
+    fraction: emptyFunction
 };
