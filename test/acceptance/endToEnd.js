@@ -6,7 +6,7 @@ driver.get('http://localhost:8000');
 
 driver.wait(function() {
     return driver.getTitle().then(function(title) {
-        return title === 'Leaderboard';
+        return title === 'Leaderboards';
     });
 }, 1000);
 
