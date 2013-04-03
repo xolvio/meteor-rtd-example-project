@@ -50,6 +50,7 @@ You should also have these installed globally:
   npm install -g karma
   npm install -g phantomjs
   npm install -g selenium-webdriver
+  npm install -g grunt-cli
 ```
 
 Clone this project's git repo, cd into the /test directory and run:
