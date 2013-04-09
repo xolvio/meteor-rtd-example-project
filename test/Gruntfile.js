@@ -8,7 +8,7 @@
                     '../app/**/*',
                     '!../app/.meteor/**/*'
                 ],
-                tasks: ['bgShell:synchronizeMirrorApp', /*'bgShell:instrumentCode',*/ 'bgShell:runTests']
+                    tasks: ['bgShell:synchronizeMirrorApp', /*'bgShell:instrumentCode',*/ 'bgShell:runTests']
             },
             bgShell: {
                 _defaults: {
@@ -18,10 +18,10 @@
                     fail: true
                 },
                 startPhantom: {
-                    cmd: 'killall phantomjs > /dev/null 2>&1; phantomjs --webdriver=4444'
+                    cmd: 'killall phantomjs > /dev/null 2>&1; phantomjs --webdriver=4444 > /dev/null 2>&1;'
                 },
                 startKarma: {
-                    cmd: 'karma start',
+                    cmd: 'karma start;',
                     bg: true
                 },
                 killMeteor: {
@@ -29,14 +29,15 @@
                 },
                 startApp: {
                     cmd: 'cd ../app;' +
-                        'meteor run --port 3000'
+                        'meteor run --port 3000;'
                 },
                 startMirrorApp: {
                     cmd: 'cd mirror_app;' +
-                        'meteor run --port 8000'
+                        'meteor run --port 8000;'
                 },
                 synchronizeMirrorApp: {
-                    cmd: 'rsync -av --delete --delay-updates --force --exclude=".meteor/local" ../app/ mirror_app'
+                    cmd: 'rsync -av --delete -q --delay-updates --force --exclude=".meteor/local" ../app/ mirror_app;' +
+                        'cp acceptance/fixtures/* mirror_app/server;'
                 },
                 instrumentCode: {
                     cmd: 'istanbul instrument ../app/client -o mirror_app/model;' +
@@ -46,7 +47,7 @@
                     bg: false
                 },
                 runTests: {
-                    cmd: 'node acceptance/endToEnd.js',
+                    cmd: 'node acceptance/endToEnd.js;',
                     bg: false,
                     fail: false
                 }
