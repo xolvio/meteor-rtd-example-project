@@ -3,6 +3,8 @@ Real Time Development ([RTD](https://github.com/xolvio/real-time-development-wit
 
 This is a template project exemplifying [RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development) with Meteor.
 
+You can find some more info on [our blog](http://blog.xolv.io).
+
 What you get:
 
 * [Meteor unit testing](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html) with Jasmine, with all the necessary stubbing that isolates units of code
