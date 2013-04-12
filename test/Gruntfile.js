@@ -8,7 +8,7 @@
                     '../app/**/*',
                     '!../app/.meteor/**/*'
                 ],
-                    tasks: ['bgShell:synchronizeMirrorApp', /*'bgShell:instrumentCode',*/ 'bgShell:runTests']
+                tasks: ['bgShell:synchronizeMirrorApp', /*'bgShell:instrumentCode',*/ 'bgShell:runTests']
             },
             bgShell: {
                 _defaults: {
@@ -21,8 +21,7 @@
                     cmd: 'killall phantomjs > /dev/null 2>&1; phantomjs --webdriver=4444 > /dev/null 2>&1;'
                 },
                 startKarma: {
-                    cmd: 'karma start;',
-                    bg: true
+                    cmd: 'karma start;'
                 },
                 killMeteor: {
                     cmd: 'for X in `ps acx | grep -i meteor | awk {"print meteor"}`; do; kill $X; done;'
@@ -37,7 +36,8 @@
                 },
                 synchronizeMirrorApp: {
                     cmd: 'rsync -av --delete -q --delay-updates --force --exclude=".meteor/local" ../app/ mirror_app;' +
-                        'cp acceptance/fixtures/* mirror_app/server;'
+                        'cp acceptance/fixtures/* mirror_app/server;',
+                    bg: false
                 },
                 instrumentCode: {
                     cmd: 'istanbul instrument ../app/client -o mirror_app/model;' +
@@ -57,13 +57,13 @@
         grunt.loadNpmTasks('grunt-contrib-watch');
 
         grunt.registerTask('default', [
-                'bgShell:synchronizeMirrorApp',
-                'bgShell:startPhantom',
-                'bgShell:startMirrorApp',
-                'bgShell:startKarma',
-                'bgShell:startApp',
-                'watch'
-            ]);
+            'bgShell:synchronizeMirrorApp',
+            'bgShell:startMirrorApp',
+            'bgShell:startPhantom',
+            'bgShell:startKarma',
+            'bgShell:startApp',
+            'watch'
+        ]);
 //          'bgShell:runTests']);
     };
 })();

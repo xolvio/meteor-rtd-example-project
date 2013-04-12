@@ -66,6 +66,7 @@
     "maxerr"        : 100,      // Maximum errors before stopping.
     "predef"        : [         // Extra globals.
         "require",
+        "__meteor_bootstrap__",
         "Meteor",
         "Players",
         "console",
