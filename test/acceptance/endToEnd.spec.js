@@ -1,22 +1,10 @@
 (function () {
     "use strict";
 
-    var webdriver = require('selenium-webdriver');
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
-    // WARNING: There are many strange problems with using PhantomJS/GhostDriver, which don't exist on real browsers.
-    // PHANTOM INTERMITTENT ISSUE: [Unable to find element with id 'login-sign-in-link'], restarting helps
-    // PHANTOM INTERMITTENT ISSUE: [Element is no longer attached to the DOM] - restarting helps
-    // PHANTOM INTERMITTENT ISSUE: [Element does not exist in cache] after the 3rd findPlayerByName
-    // PHANTOM INTERMITTENT ISSUE: [Click failed: Error: INVALID_STATE_ERR] after the method 'authenticate'
-    // PHANTOM INTERMITTENT ISSUE: [Expected player to have 15 points, but they had 10], seems the clicks don't register
-    // var driver = require('./drivers/ghostdriver.js')(webdriver);
-    // var driver = require('./drivers/chromedriver.js')(webdriver);
-    // var driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'safari'});
-    var driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'chrome'});
-    // var driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'firefox'});
-
-    driver.manage().timeouts().setScriptTimeout(5000);
-    driver.manage().timeouts().implicitlyWait(5000);
+    var webdriver = require('selenium-webdriver'),
+        driver;
 
     var resetApp = function () {
         var deferred = webdriver.promise.defer();
@@ -65,20 +53,22 @@
     var flow = webdriver.promise.controlFlow();
 
     var findPlayerByName = function (name) {
-        return function () { // <<< WTF: Why If I don't wrap with this, I get [TypeError: Object [object Object] has no method 'apply']
+        return function () {
 
             var mainDefer = webdriver.promise.defer();
 
             driver.findElements(webdriver.By.className('player')).then(function (players) {
 
                 var matchDefer = webdriver.promise.defer(),
-                    matchPromise = matchDefer.promise;
+                    matchPromise = matchDefer.promise,
+                    resolved;
 
                 players.map(function (player) {
                     player.findElement(webdriver.By.className('name')).then(function (playerName) {
                         flow.execute(function () {
                             playerName.getText().then(function (value) {
                                 if (value === name) {
+                                    resolved = true;
                                     matchDefer.resolve(player);
                                 }
                             });
@@ -87,6 +77,7 @@
                 });
 
                 flow.execute(function () {
+                    expect(resolved).toBe(true);
                     matchPromise.then(function (player) {
                         mainDefer.resolve(player);
                     });
@@ -110,52 +101,91 @@
         return mainDefer.promise;
     };
 
-    var verifyPoints = function (player, points) {
+    var verifyTheirScoreIs = function (player, points) {
         var mainDefer = webdriver.promise.defer();
         player.findElement(webdriver.By.className('score')).then(function (playerScore) {
             playerScore.getText().then(function (value) {
-                if (parseInt(value, 10) === points) {
-                    mainDefer.resolve(player);
-                } else {
-                    mainDefer.reject(new Error('Expected player to have ' + points + ' points, but they had ' + value));
-                }
+                expect(parseInt(value, 10)).toBe(points);
+                mainDefer.resolve(player);
             });
         });
         return mainDefer.promise;
     };
 
-    var verifyTheyHave10Points = function (player) {
-        return verifyPoints(player, 10);
+    var verifyTheirScoreIs10 = function (player) {
+        return verifyTheirScoreIs(player, 10);
     };
 
-    var verifyTheyHave15Points = function (player) {
-        return verifyPoints(player, 15);
+    var verifyTheirScoreIs15 = function (player) {
+        return verifyTheirScoreIs(player, 15);
     };
 
-    var done = function (exit, msg, args) {
+    var finish = function (done) {
         driver.quit().then(function () {
-            if (typeof exit !== 'object' && exit !== 0) {
-                console.log('\n');
-                console.error(msg, args);
-            } else {
-                console.log('TESTS PASSED');
-            }
+            done();
         });
     };
 
     var error = function () {
-        done(1, 'TESTS FAILED', arguments);
+        driver.quit().then(function () {
+            console.log('\n');
+            console.error('ACCEPTANCE TESTS ERROR');
+            console.error(arguments);
+        });
     };
 
-    resetApp().
-        then(setupPlayers).
-        then(openApp).
-        then(authenticate).
-        then(findPlayerByName('Grace Hopper')).
-        then(verifyTheyHave15Points).
-        then(selectPlayer).
-        then(giveThemFivePoints).
-        then(findPlayerByName('Grace Hopper')).
-        then(verifyTheyHave15Points).
-        then(done, error);
+    describe("Leaderboard functionality", function () {
+
+        beforeEach(function () {
+
+            /*
+             YOU CAN USE ANY OF THESE DRIVERS, PROVIDED YOU HAVE LAUNCHED THE RELEVANT SERVER
+             --------------------------------------------------------------------------------
+             // SERVER COMMAND: phantomjs --webdriver=4444
+             driver = require('./drivers/ghostdriver.js')(webdriver);
+
+             // SERVER COMMAND: chromedriver
+             driver = require('./drivers/chromedriver.js')(webdriver);
+
+             // SERVER COMMAND: java -jar ./selenium-server-standalone-x.y.z.jar
+             driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'chrome'});
+             driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'safari'});
+             driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'firefox'});
+
+             WARNING WHEN USING GHOST DRIVER (PHANTOM JS)
+             --------------------------------------------
+             There are many intermittent problems with using PhantomJS/GhostDriver, which don't exist on real browsers
+             ISSUE 1: [Unable to find element with id 'login-sign-in-link'], restarting helps
+             ISSUE 2: [Element is no longer attached to the DOM] - restarting helps
+             ISSUE 3: [Element does not exist in cache] after the 3rd findPlayerByName
+             ISSUE 4: [Click failed: Error: INVALID_STATE_ERR] after the method 'authenticate'
+             ISSUE 5: [Expected player to have 15 points, but they had 10] seems the clicks don't always register
+             */
+
+            driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'chrome'});
+
+            driver.manage().timeouts().setScriptTimeout(5000);
+            driver.manage().timeouts().implicitlyWait(5000);
+
+            resetApp().
+                then(setupPlayers).
+                then(openApp);
+        });
+
+        it("increases a players score by 5 when the increment button is clicked", function (done) {
+            authenticate().
+                then(findPlayerByName('Grace Hopper')).
+                then(verifyTheirScoreIs10).
+                then(selectPlayer).
+                then(giveThemFivePoints).
+                then(findPlayerByName('Grace Hopper')).
+                then(verifyTheirScoreIs15).
+                then(finish(done), error);
+        });
+
+        it("can have a more test here for this spec...", function (done) {
+            finish(done);
+        });
+
+    });
 })();

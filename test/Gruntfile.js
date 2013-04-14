@@ -47,7 +47,7 @@
                     bg: false
                 },
                 runTests: {
-                    cmd: 'node acceptance/endToEnd.js;',
+                    cmd: 'jasmine-node acceptance/;',
                     bg: false,
                     fail: false
                 }
@@ -59,7 +59,7 @@
         grunt.registerTask('default', [
             'bgShell:synchronizeMirrorApp',
             'bgShell:startMirrorApp',
-            'bgShell:startPhantom',
+            //'bgShell:startPhantom',
             'bgShell:startKarma',
             'bgShell:startApp',
             'watch'

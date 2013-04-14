@@ -70,8 +70,15 @@
         "Meteor",
         "Players",
         "console",
+        "jasmine",
         "process",
-        "module"
+        "module",
+        "describe",
+        "expect",
+        "beforeEach",
+        "afterEach",
+        "it"
+
     ]
 //    "indent"        : 4         // Specify indentation spacing
 }

@@ -45,7 +45,7 @@ Ensure you have [Meteor](http://meteor.com) installed:
   curl https://install.meteor.com | /bin/sh
 ``````
 
-You'll need [node](http://nodejs.org/)
+You'll need to download and install [node](http://nodejs.org/download/)
 
 You should also have these installed globally:
 ```bash
@@ -54,11 +54,17 @@ You should also have these installed globally:
   npm install -g selenium-webdriver
   npm install -g grunt-cli
 ```
+Download selenium-server-standalone-<x.y.z>.jar from [here](https://code.google.com/p/selenium/downloads/list).
 
-Clone this project's git repo, cd into the /test directory and run:
+Open a console and type and start the selenium server like this:
+```
+java -jar selenium-server-standalone-<x.y.z>.jar
+```
+
+Now clone this project's git repo, cd into the /test directory and run:
 ```bash
   npm install
   grunt
 ```
 
-Enjoy seeing unit tests, acceptance tests and coverage feedback as well as app updates every time you save a file.
+Enjoy seeing unit tests, acceptance tests and test coverage feedback, every time you save a file.
