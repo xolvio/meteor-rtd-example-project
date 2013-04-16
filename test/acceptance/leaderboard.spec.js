@@ -77,10 +77,10 @@
                 });
 
                 flow.execute(function () {
-                    expect(resolved).toBe(true);
                     matchPromise.then(function (player) {
                         mainDefer.resolve(player);
                     });
+                    expect(resolved).toBe(true);
                 });
 
             });
@@ -142,15 +142,15 @@
              YOU CAN USE ANY OF THESE DRIVERS, PROVIDED YOU HAVE LAUNCHED THE RELEVANT SERVER
              --------------------------------------------------------------------------------
              // SERVER COMMAND: phantomjs --webdriver=4444
-             driver = require('./drivers/ghostdriver.js')(webdriver);
+             driver = require('./drivers/ghost-driver.js')(webdriver);
 
              // SERVER COMMAND: chromedriver
-             driver = require('./drivers/chromedriver.js')(webdriver);
+             driver = require('./drivers/chrome-driver.js')(webdriver);
 
              // SERVER COMMAND: java -jar ./selenium-server-standalone-x.y.z.jar
-             driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'chrome'});
-             driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'safari'});
-             driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'firefox'});
+             driver = require('./drivers/selenium-server.js')(webdriver, {'browserName': 'chrome'});
+             driver = require('./drivers/selenium-server.js')(webdriver, {'browserName': 'safari'});
+             driver = require('./drivers/selenium-server.js')(webdriver, {'browserName': 'firefox'});
 
              WARNING WHEN USING GHOST DRIVER (PHANTOM JS)
              --------------------------------------------
@@ -162,7 +162,11 @@
              ISSUE 5: [Expected player to have 15 points, but they had 10] seems the clicks don't always register
              */
 
-            driver = require('./drivers/seleniumserver.js')(webdriver, {'browserName': 'chrome'});
+            driver = require('./drivers/selenium-server.js')(webdriver, {
+                browserName: 'chrome',
+                seleniumProtocol: 'WebDriver',
+                'chrome.switches': ['--window-size=1366,768'] // this is being ignored
+            });
 
             driver.manage().timeouts().setScriptTimeout(5000);
             driver.manage().timeouts().implicitlyWait(5000);
@@ -183,9 +187,9 @@
                 then(finish(done), error);
         });
 
-        it("can have a more test here for this spec...", function (done) {
-            finish(done);
-        });
+//        it("can have a more test here for this spec...", function (done) {
+//            finish(done);
+//        });
 
     });
 })();
