@@ -10,8 +10,8 @@ What you get today:
 * [Meteor unit testing](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html) with Jasmine, with all the necessary stubbing that isolates units of code
 * Compile-time [test coverage reports](http://gotwarlost.github.com/istanbul/public/coverage/lcov-report/index.html) using Istanbul
 * File watcher runs all tests and coverage reports as you code (thanks to [Karma](http://karma-runner.github.com/))
-* End-to-end acceptance tests with [WebdriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs) + [PhantomJS/GhostDriver](http://phantomjs.org/release-1.8.html) running in the background on a separate synchronized Meteor instance with it's own database!
-* Example of end-to-end acceptance testing using Selenium and WebdriverJS working on Meteor's reactive nature
+* End-to-end acceptance tests with [WebdriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs) + Selenium
+* Parallel synchronized Meteor app running locally with it's own database that does acceptance tests don't interfere with
 
 What being worked on right now:
 * File watcher updates browser windows showing acceptance test/coverage reports
