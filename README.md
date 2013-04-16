@@ -3,20 +3,20 @@ Real Time Development ([RTD](https://github.com/xolvio/real-time-development-wit
 
 This is a template project exemplifying [RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development) with Meteor.
 
-You can find some more info on [our blog](http://blog.xolv.io).
+You can find some more info on [unit-testing with Meteor](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html) and [end-to-end testing with Meteor](http://blog.xolv.io/2013/04/end-to-end-testing-for-web-apps-meteor.html) on [our blog](http://blog.xolv.io).
 
-What you get:
+What you get today:
 
 * [Meteor unit testing](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html) with Jasmine, with all the necessary stubbing that isolates units of code
 * Compile-time [test coverage reports](http://gotwarlost.github.com/istanbul/public/coverage/lcov-report/index.html) using Istanbul
 * File watcher runs all tests and coverage reports as you code (thanks to [Karma](http://karma-runner.github.com/))
 * End-to-end acceptance tests with [WebdriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs) + [PhantomJS/GhostDriver](http://phantomjs.org/release-1.8.html) running in the background on a separate synchronized Meteor instance with it's own database!
+* Example of end-to-end acceptance testing using Selenium and WebdriverJS working on Meteor's reactive nature
 
 What being worked on right now:
-* Examples of doing proper end-to-end demonstrating complex UI interactions such as drag and drop
+* File watcher updates browser windows showing acceptance test/coverage reports
 
 What's coming soon after:
-* File watcher updates browser windows showing acceptance test/coverage reports
 * Combined code coverage report from both unit and acceptance test runs (to give a true indication of test coverage)
 * Growl notifications
 
