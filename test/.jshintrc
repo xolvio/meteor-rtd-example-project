@@ -77,7 +77,8 @@
         "expect",
         "beforeEach",
         "afterEach",
-        "it"
+        "it",
+        "__filename"
 
     ]
 //    "indent"        : 4         // Specify indentation spacing

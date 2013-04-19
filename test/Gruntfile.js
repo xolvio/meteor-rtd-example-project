@@ -1,5 +1,7 @@
 (function () {
+
     "use strict";
+
     module.exports = function (grunt) {
         grunt.initConfig({
             watch: {
@@ -17,14 +19,20 @@
                     stderr: true,
                     fail: true
                 },
-                startPhantom: {
-                    cmd: 'killall phantomjs > /dev/null 2>&1; phantomjs --webdriver=4444 > /dev/null 2>&1;'
+                startGhostDriver: {
+                    cmd: 'phantomjs --webdriver=4444 > /dev/null 2>&1;'
                 },
                 startKarma: {
                     cmd: 'karma start;'
                 },
-                killMeteor: {
-                    cmd: 'for X in `ps acx | grep -i meteor | awk {"print meteor"}`; do; kill $X; done;'
+                killAllBackgroundProcesses: {
+                    cmd: "kill `ps -ef|grep -i meteor| grep -v grep| awk '{print $2}'`;" +
+                        "kill `ps -ef|grep -i mongod| grep -v grep| awk '{print $2}'`" +
+                        "kill `ps -ef|grep -i selenium| grep -v grep| awk '{print $2}'`" +
+                        "kill `ps -ef|grep -i karma| grep -v grep| awk '{print $2}'`" +
+                        "kill `ps -ef|grep -i phantomjs| grep -v grep| awk '{print $2}'`",
+                    fail: false,
+                    bg: false
                 },
                 startApp: {
                     cmd: 'cd ../app;' +
@@ -56,12 +64,19 @@
         grunt.loadNpmTasks('grunt-bg-shell');
         grunt.loadNpmTasks('grunt-contrib-watch');
 
+        grunt.registerTask('startSeleniumServer', 'blah', function() {
+            require('./lib/selenium-launcher.js')(function (er, selenium) {
+                console.log('SeleniumServer Started on ' + selenium.host + ':' + selenium.port);
+            });
+        });
+
         grunt.registerTask('default', [
+            'bgShell:killAllBackgroundProcesses',
             'bgShell:synchronizeMirrorApp',
             'bgShell:startMirrorApp',
-            //'bgShell:startPhantom',
             'bgShell:startKarma',
             'bgShell:startApp',
+            'startSeleniumServer',
             'watch'
         ]);
 //          'bgShell:runTests']);
