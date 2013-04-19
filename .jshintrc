@@ -65,11 +65,23 @@
     // == Undocumented Options ============================================
     "maxerr"        : 100,      // Maximum errors before stopping.
     "predef"        : [         // Extra globals.
+        "require",
+        "__meteor_bootstrap__",
         "Meteor",
         "Template",
         "Random",
         "Session",
-        "Players"
+        "Players",
+        "console",
+        "jasmine",
+        "process",
+        "module",
+        "describe",
+        "expect",
+        "beforeEach",
+        "afterEach",
+        "it",
+        "__filename"
 
     ]
 //    "indent"        : 4         // Specify indentation spacing
