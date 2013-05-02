@@ -12,24 +12,26 @@
         });
     };
 
+    var reset = function() {
+        Meteor.users.remove({});
+        Players.remove({});
+    };
+
+    var setupPlayers = function() {
+        var names = ["Ada Lovelace",
+            "Grace Hopper",
+            "Marie Curie",
+            "Carl Friedrich Gauss",
+            "Nikola Tesla",
+            "Claude Shannon"];
+        for (var i = 0; i < names.length; i += 1) {
+            Players.insert({name: names[i], score: i * 10});
+        }
+    };
+
     Meteor.startup(function () {
-
-        createRoute('reset', function() {
-            Meteor.users.remove({});
-            Players.remove({});
-        });
-
-        createRoute('setupPlayers', function() {
-            var names = ["Ada Lovelace",
-                "Grace Hopper",
-                "Marie Curie",
-                "Carl Friedrich Gauss",
-                "Nikola Tesla",
-                "Claude Shannon"];
-            for (var i = 0; i < names.length; i += 1) {
-                Players.insert({name: names[i], score: i * 10});
-            }
-        });
-
+        reset();
+        createRoute('reset', reset);
+        createRoute('setupPlayers', setupPlayers);
     });
 })();
