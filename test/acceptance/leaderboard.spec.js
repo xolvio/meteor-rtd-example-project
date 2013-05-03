@@ -162,11 +162,12 @@
              ISSUE 5: [Expected player to have 15 points, but they had 10] seems the clicks don't always register
              */
 
-            driver = require('./drivers/selenium-server.js')(webdriver, {
+            driver = require('../rtd/webdrivers/selenium-server.js')(webdriver, {
                 browserName: 'chrome',
                 seleniumProtocol: 'WebDriver',
                 'chrome.switches': ['--window-size=1366,768'] // this is being ignored
             });
+
 
             driver.manage().timeouts().setScriptTimeout(5000);
             driver.manage().timeouts().implicitlyWait(5000);

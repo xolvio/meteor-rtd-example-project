@@ -1,28 +1,21 @@
-Real Time Development ([RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development)) with Meteor
-=======================================
-This is a template project exemplifying [RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development) with Meteor.
+Example of Real Time Development ([RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development)) with Meteor
+================================================
+This is a template project exemplifying the xolv.io [RTD](https://github.com/xolvio/rtd) library with Meteor, using the leaderboard example.
 
-What does it do?
-----------------
-Provides all the stubs you need for Meteor, has examples of doing unit and acceptance tests on the leaderboard app, and every time you save a file:
-* All your unit tests will run
-* All your end-to-end acceptance tests will run
+What does RTD do?
+-----------------
+Provides stubs you need for Meteor to do:
+* All your unit tests will run (using Jasmine, can easily be swapped for Mocha)
+* All your end-to-end acceptance tests will run (using Selenium WebdriverJS)
 * You'll get a test-coverage report
+
+...every time you save a file!
 
 Tell me more
 ------------
 We're building a complete deployment pipeline for Meteor apps, and creating a template project to share with the community. We're also [blogging](http://blog.xolv.io) it and so far we have:
 * [Unit-testing with Meteor](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html)
 * [End-to-end testing with Meteor](http://blog.xolv.io/2013/04/end-to-end-testing-for-web-apps-meteor.html)
-
-How does it work?
------------------
-* Karma is configured with file watchers, Jasmine (can easily be switched to Mocha), console reporter and test coverage
-* A set of Template/Collection/Session stubs ensure code can load without Meteor
-* The stubs expose attributes, functions and events to [Jasmine](https://github.com/pivotal/jasmine) so that [spies](https://github.com/pivotal/jasmine/wiki/Spies) can mock and assert
-* A grunt task downloads and starts selenium-server for [WebdriverJS](https://code.google.com/p/selenium/wiki/WebDriverJs)
-* A grunt file watcher monitors the main app and keeps a mirror app in sync, where the destructive acceptance tests run
-* The default grunt task runs all of the above together
 
 Instructions
 ------------
@@ -32,17 +25,28 @@ Download the latest [chromeDriver](http://code.google.com/p/chromedriver/downloa
 
 Now clone this project's git repo and run:
 ```bash
-  npm install -g karma
-  npm install -g phantomjs
-  npm install -g jasmine-node
-  npm install -g selenium-webdriver
-  npm install -g grunt-cli
+  npm i -g karma phantomjs selenium-webdriver grunt-cli jasmine-node istanbul
+  git submodule init
+  git submodule update
+  cd test/rtd
   npm install
 ```
 
 And every time you start development, just run this:
 ```bash
+  cd test/rtd
   grunt
 ```
 
-and enjoy seeing feedback from unit and acceptance tests, as well as test coverage, every time you save a file.
+Have a play around, and enjoy seeing realtime feedback from unit and acceptance tests, as well as test coverage every time you save a file. If you'd like to use RTD in your Meteor project, head over to our [RTD library repo](https://github.com/xolvio/rtd).
+
+Find out more
+-------------
+* [What is RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development)
+* [What is ATDD](http://mydailyvowels.com/atdd-tdd-agile) ([more](http://www.qualitestgroup.com/Acceptance-Test-Driven-Development))
+* [How RTD for Meteor works](https://github.com/xolvio/rtd)
+* [Unit-testing with Meteor](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html)
+* [End-to-end testing with Meteor](http://blog.xolv.io/2013/04/end-to-end-testing-for-web-apps-meteor.html)
+* [Use RTD in your Meteor app](https://github.com/xolvio/rtd)
+* [See an example of RTD with Meteor + Leaderboard sample app](https://github.com/xolvio/rtd-meteor-example)
+* [Get started by forking a boilerplate project with AWS deployment support](https://github.com/xolvio/rtd-meteor-boilerplate)
