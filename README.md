@@ -1,6 +1,6 @@
 Example of Real Time Development ([RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development)) with Meteor
 ================================================
-This is a template project exemplifying the xolv.io [RTD](https://github.com/xolvio/rtd) library with Meteor, using the leaderboard example.
+This is a template project exemplifying the xolv.io [RTD library](https://github.com/xolvio/rtd) with Meteor, using the leaderboard example. See here for more on [RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development).
 
 What does RTD do?
 -----------------
