@@ -30,6 +30,14 @@
         return deferred.promise;
     };
 
+    var postBackCoverage = function () {
+        return driver.executeScript(
+            function () {
+                document.postCoverage();
+            }
+        );
+    };
+
     var authenticate = function () {
         var email = 'some@one.com';
         var password = 'test1234';
@@ -121,8 +129,10 @@
     };
 
     var finish = function (done) {
-        driver.quit().then(function () {
-            done();
+        postBackCoverage().then(function () {
+            driver.quit().then(function () {
+                done();
+            });
         });
     };
 
