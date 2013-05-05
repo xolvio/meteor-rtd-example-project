@@ -21,8 +21,6 @@ Instructions
 ------------
 Ensure you have [node](http://nodejs.org/download/) and [Meteor](http://meteor.com).
 
-Download the latest [chromeDriver](http://code.google.com/p/chromedriver/downloads/list) and move it into a directory in your PATH. To view your PATH, on Linux/Mac run ```echo $PATH``` For Windows run ```echo %PATH%```
-
 Now clone this project's git repo and run:
 ```bash
   npm i -g karma phantomjs selenium-webdriver grunt-cli jasmine-node istanbul
