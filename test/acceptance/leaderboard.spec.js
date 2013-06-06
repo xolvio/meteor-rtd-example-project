@@ -1,10 +1,73 @@
 (function () {
     "use strict";
 
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
-    var webdriver = require('selenium-webdriver'),
-        driver;
+    // GENERIC MIXIN
+    var http = require('http'),
+        request = require('request'),
+        webdriver = require('../rtd/node_modules/selenium-webdriver'),
+        driver,
+        flow = webdriver.promise.controlFlow(),
+        newRun;
+
+    var getWebdriverSessions = function (callback) {
+        request.get({
+            url: 'http://localhost:4444/wd/hub/sessions',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }, function (error, response, body) {
+            callback(JSON.parse(body).value);
+        });
+    };
+
+    var getWebdriverSessionStatus = function (sessionId, callback) {
+        request.get({
+            url: 'http://localhost:4444/wd/hub/session/' + sessionId + '/url',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }, function (error, response) {
+            callback(response.statusCode);
+        });
+    };
+
+    var deleteWebdriverSession = function (sessionId) {
+        request.del({
+            url: 'http://localhost:4444/wd/hub/session/' + sessionId,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }, null);
+    };
+
+    var deleteWebdriverSessions = function (sessions) {
+        for (var i = 0; i < sessions.length; i += 1) {
+            deleteWebdriverSession(sessions[i].id);
+        }
+    };
+
+    var reuseOrCreateSession = function (sessions) {
+        if (sessions.length === 0) {
+            driver = require('../rtd/webdrivers/selenium-server.js')(webdriver, { browserName: 'chrome' });
+            driver.manage().timeouts().setScriptTimeout(2000);
+            driver.manage().timeouts().implicitlyWait(2000);
+        } else {
+            var tempDriver = require('../rtd/webdrivers/selenium-server.js')(webdriver, { browserName: 'chrome' }, sessions[0].id);
+            getWebdriverSessionStatus(sessions[0].id, function (status) {
+                if (status !== 200) {
+                    deleteWebdriverSessions(sessions);
+                    tempDriver = require('../rtd/webdrivers/selenium-server.js')(webdriver, { browserName: 'chrome' });
+                }
+                tempDriver.manage().timeouts().setScriptTimeout(2000);
+                tempDriver.manage().timeouts().implicitlyWait(2000);
+                driver = tempDriver;
+            });
+        }
+    };
+
+    getWebdriverSessions(reuseOrCreateSession);
 
     var resetApp = function () {
         var deferred = webdriver.promise.defer();
@@ -14,28 +77,52 @@
         return deferred.promise;
     };
 
-    var setupPlayers = function () {
-        var deferred = webdriver.promise.defer();
-        driver.get('http://localhost:8000/setupPlayers').then(function () {
-            deferred.resolve();
-        });
-        return deferred.promise;
-    };
-
     var openApp = function () {
         var deferred = webdriver.promise.defer();
-        driver.get('http://localhost:8000').then(function () {
-            deferred.resolve();
-        });
+        var doGet = function () {
+            driver.get('http://localhost:8000').then(function () {
+                deferred.resolve();
+            });
+        };
+        if (newRun) {
+            doGet();
+            newRun = false;
+        } else {
+            postBackCoverage().then(doGet);
+        }
         return deferred.promise;
     };
 
+
     var postBackCoverage = function () {
-        return driver.executeScript(
-            function () {
-                document.postCoverage();
-            }
-        );
+        return driver.executeScript(function () {
+            document.postCoverage();
+        });
+    };
+
+    var waitForWebdriver = function (callback) {
+        if (driver) {
+            callback();
+        }
+        newRun = true;
+        waitsFor(function () {
+            return driver;
+        }, "Webdriver did not initialize.\nYou may need to restart RTD", 10000);
+        runs(function () {
+            callback();
+        });
+    };
+
+    var error = function (err) {
+        console.log('\n');
+        console.error(err);
+        console.error('Error in acceptance tests');
+    };
+
+    // ****************************************************************************************
+
+    var setupPlayers = function () {
+        return driver.get('http://localhost:8000/setupPlayers');
     };
 
     var authenticate = function () {
@@ -57,8 +144,6 @@
             });
         return deferred.promise;
     };
-
-    var flow = webdriver.promise.controlFlow();
 
     var findPlayerByName = function (name) {
         return function () {
@@ -128,63 +213,21 @@
         return verifyTheirScoreIs(player, 15);
     };
 
-    var finish = function (done) {
-        postBackCoverage().then(function () {
-            driver.quit().then(function () {
-                done();
-            });
-        });
-    };
-
-    var error = function () {
-        driver.quit().then(function () {
-            console.log('\n');
-            console.error('ACCEPTANCE TESTS ERROR');
-            console.error(arguments);
-        });
-    };
-
     describe("Leaderboard functionality", function () {
 
         beforeEach(function () {
-
-            /*
-             YOU CAN USE ANY OF THESE DRIVERS, PROVIDED YOU HAVE LAUNCHED THE RELEVANT SERVER
-             --------------------------------------------------------------------------------
-             // SERVER COMMAND: phantomjs --webdriver=4444
-             driver = require('./drivers/ghost-driver.js')(webdriver);
-
-             // SERVER COMMAND: chromedriver
-             driver = require('./drivers/chrome-driver.js')(webdriver);
-
-             // SERVER COMMAND: java -jar ./selenium-server-standalone-x.y.z.jar
-             driver = require('./drivers/selenium-server.js')(webdriver, {'browserName': 'chrome'});
-             driver = require('./drivers/selenium-server.js')(webdriver, {'browserName': 'safari'});
-             driver = require('./drivers/selenium-server.js')(webdriver, {'browserName': 'firefox'});
-
-             WARNING WHEN USING GHOST DRIVER (PHANTOM JS)
-             --------------------------------------------
-             There are many intermittent problems with using PhantomJS/GhostDriver, which don't exist on real browsers
-             ISSUE 1: [Unable to find element with id 'login-sign-in-link'], restarting helps
-             ISSUE 2: [Element is no longer attached to the DOM] - restarting helps
-             ISSUE 3: [Element does not exist in cache] after the 3rd findPlayerByName
-             ISSUE 4: [Click failed: Error: INVALID_STATE_ERR] after the method 'authenticate'
-             ISSUE 5: [Expected player to have 15 points, but they had 10] seems the clicks don't always register
-             */
-
-            driver = require('../rtd/webdrivers/selenium-server.js')(webdriver, {
-                browserName: 'chrome',
-                seleniumProtocol: 'WebDriver',
-                'chrome.switches': ['--window-size=1366,768'] // this is being ignored
+            var ready = false;
+            waitForWebdriver(function () {
+                resetApp().
+                    then(setupPlayers).
+                    then(openApp).
+                    then(function () {
+                        ready = true;
+                    });
             });
-
-
-            driver.manage().timeouts().setScriptTimeout(5000);
-            driver.manage().timeouts().implicitlyWait(5000);
-
-            resetApp().
-                then(setupPlayers).
-                then(openApp);
+            waitsFor(function () {
+                return ready;
+            }, "App didn't reset", 10000);
         });
 
         it("increases a players score by 5 when the increment button is clicked", function (done) {
@@ -195,8 +238,11 @@
                 then(giveThemFivePoints).
                 then(findPlayerByName('Grace Hopper')).
                 then(verifyTheirScoreIs15).
-                then(finish(done), error);
+                then(function () {
+                    done();
+                }, error);
         });
+
 
 //        it("can have a more test here for this spec...", function (done) {
 //            finish(done);
