@@ -48,7 +48,7 @@
     "couch"         : false,    // Enable globals exposed by CouchDB.
     "devel"         : false,    // Allow development statements e.g. `console.log();`.
     "dojo"          : false,    // Enable globals exposed by Dojo Toolkit.
-    "jquery"        : false,    // Enable globals exposed by jQuery JavaScript library.
+    "jquery"        : true,     // Enable globals exposed by jQuery JavaScript library.
     "mootools"      : false,    // Enable globals exposed by MooTools JavaScript framework.
     "node"          : false,    // Enable globals available when code is running inside of the NodeJS runtime environment.
     "nonstandard"   : false,    // Define non-standard but widely adopted globals such as escape and unescape.
@@ -81,7 +81,10 @@
         "beforeEach",
         "afterEach",
         "it",
-        "__filename"
+        "__filename",
+        "waitsFor",
+        "runs",
+        "spyOn"
 
     ]
 //    "indent"        : 4         // Specify indentation spacing
