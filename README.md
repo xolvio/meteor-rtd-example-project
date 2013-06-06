@@ -1,21 +1,8 @@
-Example of Real Time Development ([RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development)) with Meteor
-================================================
-This is a template project exemplifying the xolv.io [RTD library](https://github.com/xolvio/rtd) with Meteor, using the leaderboard example. See here for more on [RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development).
+Meteor Leaderboard Example using RTD
+====================================
+This is a project exemplifying xolv.io's RTD Test Runner for Meteor, an end-to-end testing solution combining Karma, Selenium Webdriver and Istanbul. [Click here for the RTD project page.](http://xolvio.github.io/rtd/)
 
-What does RTD do?
------------------
-Provides stubs you need for Meteor to do:
-* All your unit tests will run (using Jasmine, can easily be swapped for Mocha)
-* All your end-to-end acceptance tests will run (using Selenium WebdriverJS)
-* You'll get a test-coverage report
-
-...every time you save a file!
-
-Tell me more
-------------
-We're building a complete deployment pipeline for Meteor apps, and creating a template project to share with the community. We're also [blogging](http://blog.xolv.io) it and so far we have:
-* [Unit-testing with Meteor](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html)
-* [End-to-end testing with Meteor](http://blog.xolv.io/2013/04/end-to-end-testing-for-web-apps-meteor.html)
+[![RTD DEMO](http://img.youtube.com/vi/ESVRDEY-QSk/0.jpg)](http://www.youtube.com/watch?v=ESVRDEY-QSk)
 
 Instructions
 ------------
@@ -36,15 +23,4 @@ And every time you start development, just run this:
   grunt
 ```
 
-Have a play around, and enjoy seeing realtime feedback from unit and acceptance tests, as well as test coverage every time you save a file. If you'd like to use RTD in your Meteor project, head over to our [RTD library repo](https://github.com/xolvio/rtd).
-
-Find out more
--------------
-* [What is RTD](https://github.com/xolvio/real-time-development-with-meteor/wiki/Real-Time-Development)
-* [What is ATDD](http://mydailyvowels.com/atdd-tdd-agile) ([more](http://www.qualitestgroup.com/Acceptance-Test-Driven-Development))
-* [How RTD for Meteor works](https://github.com/xolvio/rtd)
-* [Unit-testing with Meteor](http://blog.xolv.io/2013/04/unit-testing-with-meteor.html)
-* [End-to-end testing with Meteor](http://blog.xolv.io/2013/04/end-to-end-testing-for-web-apps-meteor.html)
-* [Use RTD in your Meteor app](https://github.com/xolvio/rtd)
-* [See an example of RTD with Meteor + Leaderboard sample app](https://github.com/xolvio/rtd-meteor-example)
-* [Get started by forking a boilerplate project with AWS deployment support](https://github.com/xolvio/rtd-meteor-boilerplate)
+Have a play around, and enjoy seeing realtime feedback from unit and acceptance tests, as well as test coverage every time you save a file. If you'd like to use RTD in your Meteor project, head over to [the RTD project page.](http://xolvio.github.io/rtd/)
