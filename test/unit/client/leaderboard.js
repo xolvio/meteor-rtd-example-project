@@ -75,8 +75,8 @@
     describe("Template.player [click] event", function () {
 
         it("clicking a player sets them to the selected player in the session", function () {
-            Template.leaderboard.addContextAttribute('_id', 888);
-            Template.leaderboard.fireEvent('click');
+            Template.player.addContextAttribute('_id', 888);
+            Template.player.fireEvent('click');
             expect(Session.get("selected_player")).toBe(888);
         });
 
