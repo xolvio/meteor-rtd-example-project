@@ -1,6 +1,8 @@
 (function () {
     "use strict";
 
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = jasmine.getEnv().defaultTimeoutInterval = 20000;
+
     Template.stub('leaderboard');
     Template.stub('player');
 
