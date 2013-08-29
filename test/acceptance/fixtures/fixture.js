@@ -2,7 +2,7 @@
     "use strict";
 
     var createRoute = function(route, handler) {
-        __meteor_bootstrap__.app.stack.splice(0, 0, {
+        WebApp.connectHandlers.stack.splice(0, 0, {
             route: '/' + route,
             handle: function (req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
