@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+    jasmine.getEnv().defaultTimeoutInterval = 20000;
 
     // GENERIC MIXIN
     var http = require('http'),
