@@ -84,7 +84,8 @@
         "__filename",
         "waitsFor",
         "runs",
-        "spyOn"
+        "spyOn",
+        "WebApp"
 
     ]
 //    "indent"        : 4         // Specify indentation spacing

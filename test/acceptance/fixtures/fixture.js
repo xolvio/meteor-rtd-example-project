@@ -1,8 +1,14 @@
 (function () {
     "use strict";
 
-    var createRoute = function(route, handler) {
-        __meteor_bootstrap__.app.stack.splice(0, 0, {
+    var createRoute = function (route, handler) {
+        var connectHandlers;
+        if (typeof __meteor_bootstrap__.app !== 'undefined') {
+            connectHandlers = __meteor_bootstrap__.app;
+        } else {
+            connectHandlers = WebApp.connectHandlers;
+        }
+        connectHandlers.stack.splice(0, 0, {
             route: '/' + route,
             handle: function (req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -12,12 +18,12 @@
         });
     };
 
-    var reset = function() {
+    var reset = function () {
         Meteor.users.remove({});
         Players.remove({});
     };
 
-    var setupPlayers = function() {
+    var setupPlayers = function () {
         var names = ["Ada Lovelace",
             "Grace Hopper",
             "Marie Curie",
