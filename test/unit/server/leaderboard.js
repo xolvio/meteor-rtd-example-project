@@ -9,7 +9,7 @@
                 return 0;
             } });
             spyOn(Players, 'insert');
-            Meteor.startup();
+            Meteor.runStartupMethods();
             expect(Players.find.calls.length).toEqual(1);
             expect(Players.insert.calls.length).toEqual(6);
         });
@@ -19,7 +19,7 @@
                 return 1;
             } });
             spyOn(Players, 'insert');
-            Meteor.startup();
+            Meteor.runStartupMethods();
             expect(Players.find.calls.length).toEqual(1);
             expect(Players.insert.calls.length).toEqual(0);
         });
