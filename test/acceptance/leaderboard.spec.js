@@ -79,17 +79,9 @@
 
     var openApp = function () {
         var deferred = webdriver.promise.defer();
-        var doGet = function () {
-            driver.get('http://localhost:8000').then(function () {
-                deferred.resolve();
-            });
-        };
-        if (newRun) {
-            doGet();
-            newRun = false;
-        } else {
-            postBackCoverage().then(doGet);
-        }
+        driver.get('http://localhost:8000').then(function () {
+            deferred.resolve();
+        });
         return deferred.promise;
     };
 
@@ -213,22 +205,32 @@
         return verifyTheirScoreIs(player, 15);
     };
 
-    describe("Leaderboard functionality", function () {
-
-        beforeEach(function () {
-            var ready = false;
-            waitForWebdriver(function () {
-                resetApp().
-                    then(setupPlayers).
-                    then(openApp).
-                    then(function () {
-                        ready = true;
-                    });
-            });
-            waitsFor(function () {
-                return ready;
-            }, "App didn't reset", 10000);
+    beforeEach(function () {
+        var ready = false;
+        waitForWebdriver(function () {
+            resetApp().
+                then(setupPlayers).
+                then(openApp).
+                then(function () {
+                    ready = true;
+                });
         });
+        waitsFor(function () {
+            return ready;
+        }, "App didn't reset", 10000);
+    });
+
+    afterEach(function() {
+        var ready = false;
+        postBackCoverage().then(function () {
+            ready = true;
+        });
+        waitsFor(function () {
+            return ready;
+        }, "Coverage didn't postback", 10000);
+    });
+
+    describe("Leaderboard functionality", function () {
 
         it("increases a players score by 5 when the increment button is clicked", function (done) {
             authenticate().
