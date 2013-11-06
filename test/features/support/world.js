@@ -1,36 +1,28 @@
-// OTHER DRIVERS / WEBDRIVER BINDINGS
-// ----------------------------------
-// The code below uses https://code.google.com/p/selenium/wiki/WebDriverJs
-//
-// but you're free to create your own world, and can setup any driver you like, like these:
-//      https://github.com/assaf/zombie
-//      http://phantomjs.org/
-//      https://github.com/LearnBoost/soda
-//      https://github.com/admc/wd
+var World = null;
 
-var webBrowser = "chrome",
-    scriptTimeout = 2000,
-    implicitlyWait = 2000;
+(function () {
+    "use strict";
 
-var World = function World(ready) {
-    var world = this;
-    var Webdriver = require('../../rtd/webdrivers/cucumber-webdriver.js')(webBrowser, scriptTimeout, implicitlyWait);
+    // The code below uses https://code.google.com/p/selenium/wiki/WebDriverJs
+    // https://github.com/assaf/zombie
+    // http://phantomjs.org/
+    // https://github.com/LearnBoost/soda
+    // https://github.com/admc/wd
 
-    var init = function (browser) {
+    World = function World(ready) {
 
-        world.webdriver = Webdriver.driver;
-        world.browser = browser;
-        world.visit = function (url, callback) {
-            browser.get(url).then(function () {
-                callback();
-            });
-        };
+        var Webdriver = require('../../rtd/webdrivers/cucumber-webdriver.js')('chrome', 2000, 2000);
+        var Actions = require('./actions.js')(this);
 
-        ready();
+        var world = this;
+        Webdriver.getBrowser(function (browser) {
+            world.webdriver = Webdriver.driver;
+            world.browser = browser;
+            world.actions = Actions;
+            ready();
+        });
     };
-
-    Webdriver.getBrowser(init);
-};
+})();
 
 module.exports = {
     World: World
