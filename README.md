@@ -14,6 +14,7 @@ Now clone this project's git repo and run:
   git submodule init
   git submodule update
   cd test/rtd
+  git checkout
   npm install
 ```
 
