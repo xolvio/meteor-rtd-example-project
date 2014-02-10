@@ -14,7 +14,7 @@ Now clone this project's git repo and run:
   git submodule init
   git submodule update
   cd test/rtd
-  npm install
+  npm install --save-optional
 ```
 
 And every time you start development, just run this:
