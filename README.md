@@ -10,7 +10,7 @@ Ensure you have [node](http://nodejs.org/download/) and [Meteor](http://meteor.c
 
 Now clone this project's git repo and run:
 ```bash
-  npm i -g karma phantomjs selenium-webdriver grunt-cli jasmine-node istanbul
+  npm i -g karma karma-cli phantomjs selenium-webdriver grunt-cli jasmine-node istanbul
   git submodule init
   git submodule update
   cd test/rtd
