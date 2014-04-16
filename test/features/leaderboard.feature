@@ -1,8 +1,8 @@
 Feature: Player score can be increased manually
 
-  As a score keeper in some hyperthetical game
+  As a score keeper in some hypothetical game
   I want to manually give a player five points
-  So that I can publicly display a up-to-date scoreboard
+  So that I can publicly display an up-to-date scoreboard
 
   Scenario: Give 5 points to a player
     Given I authenticate
