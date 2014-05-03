@@ -10,18 +10,15 @@ Ensure you have [node](http://nodejs.org/download/) and [Meteor](http://meteor.c
 
 Now clone this project's git repo and run:
 ```bash
-  npm i -g karma karma-cli phantomjs selenium-webdriver grunt-cli jasmine-node istanbul
-  git submodule init
-  git submodule update
-  cd test/rtd
-  git checkout
-  npm install --save-optional
+  npm install
+  ./node_modules/.bin/rtd
 ```
 
 And every time you start development, just run this:
 ```bash
-  cd test/rtd
-  grunt
+  ./node_modules/.bin/rtd
+  or
+  ./node_modules/.bin/rtd runOnce
 ```
 
 Have a play around, and enjoy seeing realtime feedback from unit and acceptance tests, as well as test coverage every time you save a file. If you'd like to use RTD in your Meteor project, head over to [the RTD project page.](http://xolvio.github.io/rtd/)

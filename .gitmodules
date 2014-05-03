@@ -1,3 +1,0 @@
-[submodule "test/rtd"]
-	path = test/rtd
-	url = https://github.com/xolvio/rtd.git
