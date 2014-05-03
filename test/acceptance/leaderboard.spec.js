@@ -4,7 +4,7 @@
     jasmine.getEnv().defaultTimeoutInterval = 20000;
 
     // GENERIC MIXIN
-    var helper = require('../rtd').helper,
+    var helper = require('rtd').helper,
         webdriver = require('selenium-webdriver'),
         flow = webdriver.promise.controlFlow(),
         driver;

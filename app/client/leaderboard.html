@@ -4,7 +4,7 @@
 
 <body>
 <div id="outer">
-    {{ loginButtons }}
+    {{> loginButtons }}
     {{#if currentUser}}
         {{> leaderboard}}
     {{/if}}

@@ -2,6 +2,7 @@
     "use strict";
 
     Meteor.startup(function () {
+
         if (Players.find().count() === 0) {
             var names = ["Ada Lovelace",
                 "Grace Hopper",

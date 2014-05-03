@@ -10,14 +10,19 @@ Ensure you have [node](http://nodejs.org/download/) and [Meteor](http://meteor.c
 
 Now clone this project's git repo and run:
 ```bash
+  git clone https://github.com/xolvio/meteor-rtd-example-project
+  cd meteor-rtd-example-project
   npm install
+  ./node_modules/.bin/rtd --debug
+```
+
+Every time you start development, just run this:
+```bash
   ./node_modules/.bin/rtd
 ```
 
-And every time you start development, just run this:
+Or to run on a CI server:
 ```bash
-  ./node_modules/.bin/rtd
-  or
   ./node_modules/.bin/rtd runOnce
 ```
 
