@@ -21,6 +21,6 @@
         "karma-requirejs": "~0.2.1",
         "karma-phantomjs-launcher": "~0.1.4",
         "karma": "~0.10.10",
-        "rtd": "git+https://github.com/xdissent/rtd.git#npm"
+        "rtd": "git+https://github.com/xolvio/rtd.git"
     }
 }
